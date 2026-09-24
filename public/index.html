@@ -1,0 +1,208 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f6f4ed">
+    <title>Mercury Polyglot · Your language practice</title>
+    <link rel="stylesheet" href="/styles.css">
+  </head>
+  <body>
+    <main class="shell">
+      <header class="site-header">
+        <div class="brand" aria-label="Mercury Polyglot">
+          <span class="brand-mark" aria-hidden="true">✦</span>
+          <span>Mercury <strong>Polyglot</strong></span>
+        </div>
+        <span class="header-note">A little practice, remembered well.</span>
+      </header>
+
+      <div id="global-message" class="notice hidden" role="alert"></div>
+
+      <section id="onboarding" class="onboarding-grid" aria-labelledby="welcome-heading">
+        <div class="welcome-copy">
+          <p class="eyebrow">Your language journey</p>
+          <h1 id="welcome-heading">Make the next conversation easier.</h1>
+          <p class="lede">Practice a useful phrase, get a clear correction, and meet it again when you need the review. Your progress follows what you can actually understand and express.</p>
+          <div class="journey-preview" aria-label="How practice works">
+            <span>Understand</span><span aria-hidden="true">→</span><span>Respond</span><span aria-hidden="true">→</span><span>Remember</span>
+          </div>
+        </div>
+        <div class="panel onboarding-card">
+          <p class="eyebrow">Begin here</p>
+          <h2>Set up your practice</h2>
+          <form id="profile-form">
+            <label for="name">Your name</label>
+            <input id="name" name="name" required maxlength="80" autocomplete="given-name" placeholder="Alex">
+            <label for="language">Language to start with</label>
+            <select id="language" name="language" required></select>
+            <label for="goal">What would you like to do?</label>
+            <input id="goal" name="goal" maxlength="160" placeholder="Have everyday conversations">
+            <div class="form-row">
+              <div>
+                <label for="minutes-per-day">Minutes a day</label>
+                <input id="minutes-per-day" name="minutesPerDay" type="number" min="5" max="120" value="15" required>
+              </div>
+              <div>
+                <label for="interests">Interests <span class="optional">optional</span></label>
+                <input id="interests" name="interests" maxlength="240" placeholder="Food, travel, music">
+              </div>
+            </div>
+            <button type="submit" class="primary wide" id="create-profile">Start learning <span aria-hidden="true">→</span></button>
+          </form>
+          <div id="existing-profiles" class="existing-profiles hidden">
+            <p class="eyebrow">Already practiced here?</p>
+            <label for="existing-learner">Continue an existing learner</label>
+            <select id="existing-learner"></select>
+            <button type="button" class="secondary wide" id="continue-learner">Continue practice</button>
+          </div>
+        </div>
+      </section>
+
+      <section id="tutor" class="hidden" aria-label="Your learning space">
+        <div class="workspace-bar">
+          <div>
+            <p class="eyebrow">Your learning space</p>
+            <p class="learner-name" id="learner-label"></p>
+          </div>
+          <div class="workspace-actions">
+            <label for="active-language">Practice language</label>
+            <select id="active-language" name="active-language"></select>
+            <button type="button" id="new-learner" class="text-button">New learner</button>
+          </div>
+        </div>
+
+        <section class="hero" aria-labelledby="today-heading">
+          <div class="hero-copy">
+            <p class="eyebrow">A good next step, chosen for you</p>
+            <h1 id="today-heading">Continue today's session.</h1>
+            <p id="today-summary" class="hero-description">One focused activity at a time. We’ll bring back what needs practice.</p>
+            <button type="button" class="primary hero-action" id="session-action">Continue today's session <span aria-hidden="true">→</span></button>
+          </div>
+          <div class="hero-orbit" aria-hidden="true"><span>✦</span><i></i><b></b></div>
+        </section>
+
+        <nav class="journey" aria-label="How this session works">
+          <ol id="journey-steps">
+            <li data-stage="understand">Understand</li>
+            <li data-stage="speak">Respond</li>
+            <li data-stage="correct">Correct</li>
+            <li data-stage="retry">Retry</li>
+            <li data-stage="reuse">Reuse</li>
+            <li data-stage="remember">Remember</li>
+          </ol>
+        </nav>
+
+        <div class="content-grid">
+          <section class="panel practice-panel" aria-label="Practice activity">
+            <div id="session-empty" class="empty-session">
+              <span class="empty-icon" aria-hidden="true">✦</span>
+              <h2 id="activity-heading">Ready when you are.</h2>
+              <p>Your next exercise will appear here. Each answer helps the tutor choose what comes next.</p>
+            </div>
+
+            <div id="activity-content" class="hidden">
+              <div class="activity-topline">
+                <span id="phase-label" class="pill"></span>
+                <span id="activity-type" class="muted"></span>
+              </div>
+              <h2 id="skill-label"></h2>
+              <p id="activity-context" class="muted hidden"></p>
+              <p id="activity-prompt" class="prompt"></p>
+              <div id="input-card" class="input-card hidden">
+                <span class="small-label">Listen or read</span>
+                <p id="input-text"></p>
+                <button type="button" id="listen-button" class="secondary small-button">Listen to this text</button>
+              </div>
+
+              <form id="answer-form">
+                <fieldset id="options-field" class="options-field hidden">
+                  <legend>Choose your answer</legend>
+                  <div id="answer-options"></div>
+                </fieldset>
+                <div id="written-answer">
+                  <label for="answer">Your response</label>
+                  <textarea id="answer" rows="4" placeholder="Write what you would say…"></textarea>
+                  <div class="input-tools">
+                    <button type="button" id="dictate-button" class="secondary small-button hidden">Dictate answer</button>
+                    <p id="modality-note" class="microcopy">Written and dictated answers show language production. Pronunciation is not scored here.</p>
+                  </div>
+                </div>
+
+                <fieldset id="language-relation" class="relation-field hidden">
+                  <legend>Did another language help or interfere? <span class="optional">optional</span></legend>
+                  <div class="relation-controls">
+                    <label for="relation-type" class="visually-hidden">Effect of another language</label>
+                    <select id="relation-type">
+                      <option value="none">No other language</option>
+                      <option value="helped">Another language helped</option>
+                      <option value="interfered">Another language interfered</option>
+                    </select>
+                    <label for="source-language" class="visually-hidden">Source language</label>
+                    <select id="source-language" disabled></select>
+                  </div>
+                  <p id="relation-note" class="microcopy">Your observation helps track connections between languages.</p>
+                </fieldset>
+
+                <button type="submit" id="submit-answer" class="primary">Check my answer <span aria-hidden="true">→</span></button>
+              </form>
+
+              <div id="feedback" class="feedback hidden" role="status" aria-live="polite"></div>
+              <div id="self-rating" class="rating hidden" aria-label="Rate your recall">
+                <h3>How well could you produce it?</h3>
+                <p>Compare your answer with the example above. Choose the closest description.</p>
+                <div class="rating-buttons">
+                  <button type="button" data-score="0">Couldn’t recall</button>
+                  <button type="button" data-score="1">Needed help</button>
+                  <button type="button" data-score="2">Mostly right</button>
+                  <button type="button" data-score="3">Easy and natural</button>
+                </div>
+              </div>
+              <button type="button" id="continue-activity" class="primary hidden">Continue <span aria-hidden="true">→</span></button>
+            </div>
+
+            <div id="session-complete" class="complete-session hidden" role="status">
+              <span class="empty-icon" aria-hidden="true">✦</span>
+              <h2>Nice work. This round is complete.</h2>
+              <p>Your answers are saved. The next session will use what you understood, produced, and need to revisit.</p>
+              <button type="button" id="start-another" class="secondary">Start another round</button>
+            </div>
+          </section>
+
+          <aside class="panel progress-panel" aria-labelledby="progress-heading">
+            <p class="eyebrow">Your evidence</p>
+            <h2 id="progress-heading">Progress that remembers</h2>
+            <p class="muted progress-intro">These numbers reflect your answers over time.</p>
+            <div class="quick-stats">
+              <div><strong id="due-count">0</strong><span>reviews due</span></div>
+              <div><strong id="attempt-count">0</strong><span>answers saved</span></div>
+            </div>
+            <div class="meter emerald">
+              <div class="meter-heading"><span>Emerald · understanding</span><strong id="emerald-value">0%</strong></div>
+              <progress id="emerald-meter" max="100" value="0" aria-label="Understanding score"></progress>
+            </div>
+            <div class="meter copper">
+              <div class="meter-heading"><span>Copper · expression</span><strong id="copper-value">0%</strong></div>
+              <progress id="copper-meter" max="100" value="0" aria-label="Expression score"></progress>
+            </div>
+            <p class="microcopy">Understanding and expression can grow at different speeds. That helps us choose the next useful exercise.</p>
+          </aside>
+        </div>
+
+        <section class="panel constellation" aria-labelledby="constellation-heading">
+          <div class="section-heading">
+            <div>
+              <p class="eyebrow">Across your languages</p>
+              <h2 id="constellation-heading">Language Constellation</h2>
+            </div>
+            <p>Connections appear when your practice shows that one language helped or interfered with another.</p>
+          </div>
+          <div id="constellation-nodes" class="language-nodes" aria-label="Languages in your constellation"></div>
+          <div id="constellation-edges" class="language-edges" aria-live="polite"></div>
+        </section>
+      </section>
+      <footer class="site-footer">Small steps. Clear evidence. Better conversations.</footer>
+    </main>
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>
